@@ -1,0 +1,134 @@
+#heading {
+		position:fixed;
+		left:1%; 
+		top:2%; 
+		width:87%; 
+		height:150px;
+		text-align:center;
+		font-size:large;
+		background-color:black;
+		color:white;
+                
+}
+
+#userspec {
+		position:fixed;
+		left:1%; 
+		top:185px; 
+		width:97%; 
+		height:50px;
+		text-align:center; 
+		background-color:black;
+		font-size:large;
+		color:white;
+}
+#navigation {
+		position:fixed;
+		left:1%;
+		top:255px; 
+		width:10%; 
+		height:56%;
+		background-color:black;
+		text-align:left;
+		color:white;
+}
+#content {
+                
+		position:fixed;
+		left:12.5%;
+		top:255px;
+		width:86.5%; 
+		height:56%; 
+		background-color:black;
+		color:white;
+                overflow:scroll;
+}
+
+#itemcontent {
+		position:fixed;
+		left:40%;
+		top:255px;
+		width:59%; 
+		height:56%; 
+		background-color:black;
+		color:white;
+                
+}
+#itemImage {
+                
+		position:fixed;
+		left:12.5%;
+		top:255px;
+		width:28%; 
+		height:56%; 
+		background-color:black;
+		color:white;
+                
+}
+#login {
+		position:fixed;
+		left:88%;
+		top:2%; 
+		width:10%; 
+		height:150px;
+		text-align:right;
+		font-size:small; 
+		background-color:black;
+		color:white;
+}
+#order {
+		position:fixed;
+		left:25.5%;
+		top:255px;
+		width:86%; 
+		height:56%; 
+		background-color:black;
+		color:white;
+                overflow:scroll;
+}
+#footer {
+		position:fixed;
+		left:1%; 
+		top:91%; 
+		width:97.5%; 
+		height:7%; 
+		background-color:black;
+		font-size:large;
+		color:white;
+}
+.tableBoarders table{
+    text-align: center;
+    border: 1px solid whitesmoke;
+}
+.tableBoarders th{
+    height: 50px;
+    text-align: center;
+    color: black;
+    background-color: white;
+    border: 1px solid whitesmoke;
+}
+.tableBoarders td{
+    text-align: center;
+    border: 1px solid whitesmoke;
+    padding: 10px;
+}
+
+p.padding{
+    padding-left:5%;
+}
+p.padding2{
+    padding-left:3%;
+}
+
+//needed buttons to get beside eachother
+//since it looks too ugly vertically on top of eachother
+.button { //http://stackoverflow.com/questions/18289525/two-buttons-side-by-side
+        appearance: button;
+        -moz-appearance: button;
+        -webkit-appearance: button;
+        text-decoration: none; 
+        font: menu; 
+        color: ButtonText;
+        display: inline-block; 
+        padding: 2px 8px;
+}
