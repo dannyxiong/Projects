@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body>
+	
+	<h1>#{userBean.viewProfile.username}'s profile</h1><br/>
+	First Name: ${userBean.viewProfile.firstName}<br/>
+	Last Name: ${userBean.viewProfile.lastName}<br/>
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+	<!-- testing -->
+	<h3>(test) Logged in as #{userBean.user.username}</h3>
+	
+	<h:form>
+			<p:commandButton value="Log out" action="#{userBean.logout()}" />
+	</h:form>
+	
+	<div id="search">
+	<!-- Search users by name -->
+		<h:form>
+			<p:inputText value="#{userBean.searchFriendByName}" placeholder="Search Friend" />
+			<p:commandButton value="Search" action="#{userBean.getSearch()}" />
+		</h:form>
+		
+	<!-- display table -->
+	    <p:dataTable value="#{userBean.searchList}" var="Sresult" id="searchList">
+	        <p:column headerText="Search Result">
+	                 <p:commandLink value="#{Sresult.username}" action="#{userBean.goToProfile(Sresult)}" />
+	        </p:column>
+	    </p:dataTable>
+	</div>
+	
+	<div id="wallposts">
+		<!-- User profile wall postings -->
+		<p:dataTable value="#{userBean.wallPostList}" var="w" id="wallPost">
+			<p:column headerText="User">
+				#{w.friend.username}
+			</p:column>
+			<p:column headerText="Post">
+				#{w.message} 
+				<h:form>
+					<p:commandButton action="#{userBean.likeWPost(w)}" value="Like" />
+				</h:form>
+			</p:column>
+			<p:column headerText="Date Post">
+				#{w.postedDate}" 
+			</p:column>
+		</p:dataTable>
+		
+		<!-- msg submit-->
+		<h:form rendered="#{userBean.canPost()}">
+			<p:inputText value="#{userBean.post}" placeholder="Message" />
+			<p:commandButton action="#{userBean.submitPost}" value="Post Msg" />
+		</h:form>
+	</div>
+	
+	<div id="friendLst">
+		<!-- User profile existing Friends (List)-->
+		<p:dataTable value="#{applicationBean.retrieveFriendsFor(userBean.viewProfile).getUsers()}" var="f" id="fList">
+			<p:column headerText="Friends">
+				<p:commandLink value="#{f.username}" action="#{userBean.goToProfile(f)}" />
+			</p:column>
+		</p:dataTable>
+	</div>
+	
+	<div id="friendButton">
+		<!-- Friend request button -->
+		<h:form id="fbutton">
+			<p:commandButton value="#{userBean.fButton}" action="#{userBean.sendFriendRequest()}" disabled="#{userBean.disableButton}" />
+		</h:form>
+	</div>
+	
+	<!-- List of Friend requests; accept/decline-->
+	
+	<div id="responseFriend">
+		<!-- User profile existing Friends (List)-->
+		<p:dataTable value="#{applicationBean.retrieveFriendRequestsFor(userBean.user).getFriendRequests()}" var="r" id="rspList">
+			<p:column headerText="Requester">
+				#{r.requestor.username}
+			</p:column>
+			<p:column headerText="Accept request?">
+				<h:form >
+					<p:commandButton action="#{userBean.acceptRequest(r)}" value="Accept" update="rspList"/>
+					<p:commandButton action="#{userBean.declineRequest(r)}" value="Decline" update="rspList"/>
+				</h:form>
+			</p:column>
+		</p:dataTable>
+	</div>
+	
+	<!-- POLL Updates the wallPost, searchList, friendList by 3 second-->
+	<h:form>
+		<p:poll interval="3" listener="${userBean.retrieveWallPostsFor()}" update="wallPost, fList, searchList, rspList"/>
+	</h:form>
+</body> 
+</html>
